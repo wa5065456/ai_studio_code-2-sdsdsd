@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Super Funky Hello World!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  /* Custom Cursor */
+  body {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="orange" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.22-11.41l3.54 3.54-3.54 3.54L9 14.54l3.54-3.54L9 7.46l2.78-2.78z"/></svg>') 12 12, auto;
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(45deg, #ff00cc, #3333ff, #00ffcc, #ffcc00);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Hide overflow from animations */
+    color: white;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+  }
+
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .message-container {
+    perspective: 1000px; /* For 3D transformations */
+    margin: 20px 0;
+    position: relative;
+    width: 80%; /* Limit width to contain animated elements */
+    max-width: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hello-text {
+    font-size: 3em;
+    padding: 10px 20px;
+    border: 5px solid white;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
+    margin: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hello-text:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 1), inset 0 0 15px rgba(255, 255, 255, 0.7);
+  }
+
+  /* Specific Animations */
+  .bounce {
+    animation: bounce 2s infinite ease-in-out;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(10deg); }
+  }
+
+  .rotate-3d {
+    animation: rotate3d 8s infinite linear;
+  }
+  @keyframes rotate3d {
+    0% { transform: rotateY(0deg) rotateX(0deg); }
+    25% { transform: rotateY(90deg) rotateX(20deg); }
+    50% { transform: rotateY(180deg) rotateX(0deg); }
+    75% { transform: rotateY(270deg) rotateX(-20deg); }
+    100% { transform: rotateY(360deg) rotateX(0deg); }
+  }
+
+  .pulse {
+    animation: pulse 1.5s infinite alternate;
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+  }
+
+  .spin-word span {
+    display: inline-block;
+    animation: spinWord 1.5s infinite alternate;
+    margin: 0 5px;
+  }
+  .spin-word span:nth-child(even) { animation-delay: 0.1s; }
+  .spin-word span:nth-child(odd) { animation-delay: 0.2s; }
+
+  @keyframes spinWord {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+  }
+
+  /* Button Styling */
+  .funky-button {
+    background-color: #ff00cc;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2em;
+    margin-top: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px #9e007e, 0 0 20px rgba(255, 0, 204, 0.7);
+    transition: all 0.1s ease;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="lime" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2zm3 8h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>') 12 12, pointer;
+  }
+
+  .funky-button:active {
+    transform: translateY(4px);
+    box-shadow: 0 4px #9e007e, 0 0 10px rgba(255, 0, 204, 0.7);
+  }
+
+  .interactive-message {
+    margin-top: 20px;
+    font-size: 1.8em;
+    color: #00ffcc;
+    text-align: center;
+    min-height: 2em; /* Ensure space for message */
+  }
+
+  .footer-text {
+    font-family: 'Creepster', cursive;
+    font-size: 1.5em;
+    margin-top: 50px;
+    color: #ffcc00;
+    animation: spookyPulse 3s infinite alternate;
+  }
+
+  @keyframes spookyPulse {
+    0% { transform: scale(1); text-shadow: 0 0 5px #ffcc00; }
+    100% { transform: scale(1.05); text-shadow: 0 0 15px #ffcc00, 0 0 25px rgba(255, 204, 0, 0.5); }
+  }
+
+  /* Falling Emojis */
+  .emoji {
+    position: absolute;
+    top: -50px;
+    font-size: 2em;
+    opacity: 0;
+    animation: fall 10s linear infinite;
+    pointer-events: none; /* Allows clicks to pass through */
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="message-container">
+    <div class="hello-text bounce">Hello Funky!</div>
+    <div class="hello-text rotate-3d">World of Wonders!</div>
+    <div class="hello-text pulse">Greetings, Earthling!</div>
+    <div class="hello-text spin-word"><span>S</span><span>p</span><span>i</span><span>n</span><span>n</span><span>y</span></div>
+  </div>
+
+  <button id="funkyButton" class="funky-button">Click for a Surprise!</button>
+  <p id="interactiveMessage" class="interactive-message">Awaiting your click...</p>
+
+  <p class="footer-text">Welcome to the Most Outrageous Webpage!</p>
+
+  <script>
+    const button = document.getElementById('funkyButton');
+    const interactiveMessage = document.getElementById('interactiveMessage');
+    const messages = [
+      "You clicked it! Awesome!",
+      "Whoa! What a move!",
+      "That's some serious clicking power!",
+      "Booyah! You're a pro!",
+      "Another one bites the dust... or clicks the button!"
+    ];
+    let messageIndex = 0;
+
+    button.addEventListener('click', () => {
+      interactiveMessage.textContent = messages[messageIndex];
+      messageIndex = (messageIndex + 1) % messages.length;
+    });
+
+    // Dynamic background color change
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    // You can uncomment this if you want an additional background color change,
+    // but the gradient animation is already quite active.
+    // setInterval(() => {
+    //   document.body.style.backgroundColor = getRandomColor();
+    // }, 5000); // Change solid background color every 5 seconds if gradient not enough
+
+    // Falling Emojis
+    const emojis = ['🌟', '✨', '🌈', '🎉', '🚀', '👾', '💖', '🎶'];
+    function createFallingEmoji() {
+      const emoji = document.createElement('span');
+      emoji.classList.add('emoji');
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = Math.random() * 100 + 'vw';
+      emoji.style.animationDuration = Math.random() * 8 + 5 + 's'; // 5 to 13 seconds
+      emoji.style.animationDelay = Math.random() * 0.5 + 's'; // Stagger start
+      document.body.appendChild(emoji);
+
+      emoji.addEventListener('animationend', () => {
+        emoji.remove();
+      });
+    }
+
+    setInterval(createFallingEmoji, 500); // Create a new falling emoji every 0.5 seconds
+  </script>
+
+</body>
+</html>
